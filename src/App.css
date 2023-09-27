@@ -1,0 +1,170 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+h3{
+  margin:10px 0 0 0;
+}
+p{
+  margin:20px 0;
+}
+
+h1 {
+  color: #333;
+}
+
+h2 {
+  color: #666;
+  margin-top: 20px;
+}
+
+form {
+  margin-top: 20px;
+}
+
+input[type="text"],
+textarea {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="submit"],
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin:0 10px 0 0;
+}
+.date{
+  font-size:13px;
+}
+
+button[type="submit"]:hover,
+button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+li h3 {
+  color: #333;
+}
+
+li p {
+  color: #777;
+}
+
+button[type="button"] {
+  background-color: #dc3545;
+}
+
+button[type="button"]:hover {
+  background-color: #c82333;
+}
+
+.no-notes {
+  color: #777;
+  margin-top: 10px;
+  border-top:2px solid gray;
+  margin:10px 0 0;
+}
+
+button.delete {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+button.delete:hover {
+  background-color: #c82333;
+}
+
+button.archive {
+  background-color: #ffc107;
+  color: #333;
+}
+
+button.archive:hover {
+  background-color: #d39e00;
+}
+
+@media (max-width: 600px) {
+  .App {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-top: 15px;
+  }
+
+  form {
+    margin-top: 15px;
+  }
+
+  input[type="text"],
+  textarea {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  button[type="submit"],
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  li {
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+
+  button.delete,
+  button.archive {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+}
