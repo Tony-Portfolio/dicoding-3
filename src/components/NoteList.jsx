@@ -6,7 +6,7 @@ const formatDate = (createdAt) => {
   return date.toLocaleDateString('id-ID', options);
 };
 
-const NoteList = ({ notes, onDelete, onArchive }) => {
+const NoteList = ({ notes, onDelete, onArchive, onEdit, isEdit }) => {
   return (
     <div>
       {notes.length === 0 ? (
@@ -18,8 +18,13 @@ const NoteList = ({ notes, onDelete, onArchive }) => {
             <span className='date'>dibuat tanggal: {formatDate(note.createdAt)}</span>
             <p>{note.body}</p>
             <button onClick={() => onDelete(note.id)}>Hapus</button>
-            <button onClick={() => onArchive(note.id)}>
-              {note.archived ? 'Pindahkan' : 'Arsipkan'}
+            {!isEdit ?
+              <button onClick={() => onArchive(note.id)}>
+                {note.archived ? 'Pindahkan' : 'Arsipkan'}
+              </button>
+              : ''}
+            <button onClick={() => onEdit(note)}>
+              Ubah
             </button>
           </div>
         ))

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import NoteList from './components/NoteList';
 import NoteForm from './components/NoteForm';
+import EditNoteForm from './components/EditNoteForm';
 
 function App() {
   const [notes, setNotes] = useState([
@@ -13,6 +14,8 @@ function App() {
       createdAt: '2022-04-14T04:27:34.572Z'
     },
   ]);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
   const [showArchived, setShowArchived] = useState(false);
 
   const addNote = (newNote) => {
@@ -36,6 +39,29 @@ function App() {
     });
     setNotes(updatedNotes);
   };
+
+  const editNote = (id, updatedNote) => {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === id) {
+        return { ...note, ...updatedNote };
+      }
+      return note;
+    });
+    setNotes(updatedNotes);
+    hideEditForm();
+  };
+
+
+  const showEditFormForNote = (note) => {
+    setSelectedNote(note);
+    setShowEditForm(true);
+  };
+
+  const hideEditForm = () => {
+    setSelectedNote(null);
+    setShowEditForm(false);
+  };
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredNotes = notes
@@ -55,7 +81,20 @@ function App() {
         {showArchived ? 'Sembunyikan Arsip' : 'Tampilkan Arsip'}
       </button>
       <NoteForm onAddNote={addNote} />
-      <NoteList notes={filteredNotes} onDelete={deleteNote} onArchive={toggleArchive} />
+      <NoteList
+        notes={filteredNotes}
+        onDelete={deleteNote}
+        onArchive={toggleArchive}
+        onEdit={showEditFormForNote}
+        isEdit={showEditForm}
+      />
+      {showEditForm && (
+        <EditNoteForm
+          note={selectedNote}
+          onSave={editNote}
+          onCancel={hideEditForm}
+        />
+      )}
     </div>
   );
 }
