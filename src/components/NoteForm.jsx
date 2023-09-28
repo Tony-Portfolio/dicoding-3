@@ -23,15 +23,17 @@ const NoteForm = ({ onAddNote }) => {
 
   return (
     <div>
-      <h2>Tambah Catatan Baru</h2>
+      {/* <h2>Tambah Catatan Baru</h2> */}
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Judul"
-          value={title} required
-          onChange={handleTitleChange}
-        />
-        <p>{50 - titleCharacterCount} karakter tersisa</p>
+        <div className="title">
+          <input
+            type="text"
+            placeholder="Judul"
+            value={title} required
+            onChange={handleTitleChange}
+          />
+          <p>{50 - titleCharacterCount} / 50</p>
+        </div>
         <textarea
           placeholder="Isi catatan"
           value={body} required

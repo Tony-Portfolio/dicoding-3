@@ -3,17 +3,10 @@ import './App.css';
 import NoteList from './components/NoteList';
 import NoteForm from './components/NoteForm';
 import EditNoteForm from './components/EditNoteForm';
+import { getInitialData, showFormattedDate } from './utils/index';
 
 function App() {
-  const [notes, setNotes] = useState([
-    {
-      id: 1,
-      title: "Babel",
-      body: "Babel merupakan tools open-source yang digunakan untuk mengubah sintaks ECMAScript 2015+ menjadi sintaks yang didukung oleh JavaScript engine versi lama. Babel sering dipakai ketika kita menggunakan sintaks terbaru termasuk sintaks JSX.",
-      archived: false,
-      createdAt: '2022-04-14T04:27:34.572Z'
-    },
-  ]);
+  const [notes, setNotes] = useState(getInitialData);
   const [showEditForm, setShowEditForm] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
   const [showArchived, setShowArchived] = useState(false);
@@ -71,30 +64,43 @@ function App() {
   return (
     <div className="App">
       <h1>Aplikasi Catatan Pribadi</h1>
-      <input
-        type="text"
-        placeholder="Cari catatan..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={() => setShowArchived(!showArchived)}>
-        {showArchived ? 'Sembunyikan Arsip' : 'Tampilkan Arsip'}
-      </button>
-      <NoteForm onAddNote={addNote} />
-      <NoteList
-        notes={filteredNotes}
-        onDelete={deleteNote}
-        onArchive={toggleArchive}
-        onEdit={showEditFormForNote}
-        isEdit={showEditForm}
-      />
-      {showEditForm && (
-        <EditNoteForm
-          note={selectedNote}
-          onSave={editNote}
-          onCancel={hideEditForm}
-        />
-      )}
+      <main>
+        <section>
+          <NoteForm onAddNote={addNote} />
+          <hr />
+          {showEditForm && (
+            <>
+
+              <EditNoteForm
+                note={selectedNote}
+                onSave={editNote}
+                onCancel={hideEditForm}
+              />
+            </>
+          )}
+        </section>
+        <section>
+          <div className="search">
+            <input
+              type="text"
+              placeholder="Cari catatan..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button onClick={() => {setShowArchived(!showArchived),hideEditForm()}}>
+              {showArchived ? 'Sembunyikan Arsip' : 'Tampilkan Arsip'}
+            </button>
+          </div>
+          <NoteList
+            notes={filteredNotes}
+            onDelete={deleteNote}
+            onArchive={toggleArchive}
+            onEdit={showEditFormForNote}
+            onCancel={hideEditForm}
+            formatDate={showFormattedDate}
+          />
+        </section>
+      </main>
     </div>
   );
 }
